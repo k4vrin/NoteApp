@@ -48,6 +48,12 @@ android {
         }
     }
     namespace 'com.plcoding.cleanarchitecturenoteapp'
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+        correctErrorTypes true
+    }
 }
 
 dependencies {
