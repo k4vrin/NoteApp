@@ -20,10 +20,11 @@ import androidx.navigation.NavController
 import com.plcoding.cleanarchitecturenoteapp.R
 import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.notes.components.NoteItem
 import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.notes.components.OrderSection
+import com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
-fun NoteScreen(
+fun NotesScreen(
 	navController: NavController,
 	viewModel: NotesViewModel = hiltViewModel(),
 ) {
@@ -39,7 +40,9 @@ fun NoteScreen(
 		floatingActionButton = {
 			FloatingActionButton(
 				//// FAB onClick ////
-				onClick = {},
+				onClick = {
+					navController.navigate(route = Screen.AddEditNoteScreen.route)
+				},
 				//// FAB BG ////
 				backgroundColor = MaterialTheme.colors.primary
 			) {
@@ -89,7 +92,7 @@ fun NoteScreen(
 					)
 				}
 			}
-			
+
 			//// Order Section ////
 			AnimatedVisibility(
 				visible = state.isOrderSectionVisible,
@@ -101,7 +104,7 @@ fun NoteScreen(
 						.fillMaxWidth()
 						.padding(vertical = 16.dp),
 					noteOrder = state.noteOrder,
-					onOrderChange =  { newNoteOrder ->
+					onOrderChange = { newNoteOrder ->
 						viewModel.onEvent(
 							event = NotesEvent.Order(
 								noteOrder = newNoteOrder
@@ -112,11 +115,11 @@ fun NoteScreen(
 			}
 
 			Spacer(modifier = Modifier.height(16.dp))
-			
+
 			//// Notes ////
 			LazyColumn(
 				modifier = Modifier
-				    .fillMaxSize()
+					.fillMaxSize()
 			) {
 				items(
 					items = state.notes,
@@ -125,7 +128,12 @@ fun NoteScreen(
 						note = note,
 						modifier = Modifier
 							.fillMaxWidth()
-							.clickable { },
+							//// Each note clickable  ////
+							.clickable {
+								navController.navigate(
+									route = Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
+								)
+							},
 						onDeleteClick = {
 							viewModel.onEvent(event = NotesEvent.DeleteNote(note = note))
 							scope.launch {

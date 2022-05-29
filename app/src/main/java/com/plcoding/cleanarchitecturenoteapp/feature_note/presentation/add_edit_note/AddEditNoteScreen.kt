@@ -108,6 +108,7 @@ fun AddEditNoteScreen(
 			modifier = Modifier
 				.fillMaxSize()
 				.background(color = noteBackGroundAnimatable.value)
+				.padding(all = 16.dp)
 		) {
 
 			//// Color Selection ////
@@ -174,7 +175,8 @@ fun AddEditNoteScreen(
 			Spacer(modifier = Modifier.height(16.dp))
 
 			//// Note Content ////
-			TransparentHintTextField(text = titleState.text,
+			TransparentHintTextField(
+				text = contentSate.text,
 				hint = contentSate.hint,
 				onValueChange = {
 					viewModel.onEvent(event = AddEditNoteEvent.EnteredContent(value = it))

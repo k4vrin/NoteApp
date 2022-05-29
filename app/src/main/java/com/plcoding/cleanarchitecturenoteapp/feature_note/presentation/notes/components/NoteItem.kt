@@ -125,7 +125,8 @@ fun NoteItem(
 		) {
 			Icon(
 				imageVector = Icons.Default.Delete,
-				contentDescription = stringResource(R.string.delete_icon)
+				contentDescription = stringResource(R.string.delete_icon),
+				tint = MaterialTheme.colors.onSurface
 			)
 		}
 	}
