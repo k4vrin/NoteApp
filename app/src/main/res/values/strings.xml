@@ -9,4 +9,5 @@
     <string name="add_note">Add note</string>
     <string name="your_note">Your note</string>
     <string name="sort">Sort</string>
+    <string name="save_note">Save note</string>
 </resources>
