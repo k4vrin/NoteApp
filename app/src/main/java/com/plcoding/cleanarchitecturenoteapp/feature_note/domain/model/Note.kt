@@ -24,3 +24,14 @@ data class Note(
 		)
 	}
 }
+
+/**
+ * Invalid note exception
+ *
+ * @constructor
+ *
+ * @param message
+ *
+ * Validating the note that we want to insert
+ */
+class InvalidNoteException(message: String) : Exception()
